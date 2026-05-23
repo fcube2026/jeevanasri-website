@@ -1,0 +1,172 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../lib/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model AdminUser {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  password  String
+  name      String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  password  String
+  phone     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Doctor {
+  id              String   @id @default(cuid())
+  name            String
+  specialization  String
+  qualification   String
+  experience      String
+  department      String
+  availability    String
+  consultingHours String
+  phone           String?
+  email           String?
+  languages       String?
+  shortBio        String   @db.Text
+  description     String   @db.Text
+  image           String?
+  isActive        Boolean  @default(true)
+  showOnHomepage  Boolean  @default(true)
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @updatedAt
+}
+
+model Blog {
+  id            String      @id @default(cuid())
+  title         String
+  slug          String      @unique
+  featuredImage String?
+  author        String
+  publishDate   DateTime?
+  category      String
+  summary       String      @db.Text
+  content       String      @db.Text
+  tags          String?
+  metaTitle     String?
+  metaDesc      String?
+  isFeatured    Boolean     @default(false)
+  status        BlogStatus  @default(DRAFT)
+  readTime      String?
+  images        BlogImage[]
+  views         Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+}
+
+enum BlogStatus {
+  DRAFT
+  PUBLISHED
+}
+
+model BlogImage {
+  id        String   @id @default(cuid())
+  url       String
+  blog      Blog     @relation(fields: [blogId], references: [id], onDelete: Cascade)
+  blogId    String
+  createdAt DateTime @default(now())
+}
+
+model Service {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text
+  icon        String?
+  order       Int      @default(0)
+  isVisible   Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Appointment {
+  id          String            @id @default(cuid())
+  patientName String
+  mobile      String
+  email       String?
+  department  String?
+  doctor      String?
+  prefDate    String?
+  prefTime    String?
+  notes       String?           @db.Text
+  status      AppointmentStatus @default(PENDING)
+  adminNotes  String?           @db.Text
+  createdAt   DateTime          @default(now())
+  updatedAt   DateTime          @updatedAt
+}
+
+enum AppointmentStatus {
+  PENDING
+  APPROVED
+  CANCELLED
+  COMPLETED
+  RESCHEDULED
+}
+
+model Inquiry {
+  id        String        @id @default(cuid())
+  name      String
+  mobile    String
+  email     String?
+  message   String        @db.Text
+  status    InquiryStatus @default(OPEN)
+  createdAt DateTime      @default(now())
+  updatedAt DateTime      @updatedAt
+}
+
+enum InquiryStatus {
+  OPEN
+  RESOLVED
+}
+
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  review    String   @db.Text
+  rating    Int      @default(5)
+  treatment String?
+  image     String?
+  isVisible Boolean  @default(true)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Faq {
+  id        String   @id @default(cuid())
+  question  String
+  answer    String   @db.Text
+  order     Int      @default(0)
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Media {
+  id        String   @id @default(cuid())
+  url       String
+  filename  String
+  size      Int
+  mimeType  String
+  folder    String?
+  createdAt DateTime @default(now())
+}
+
+model WebsiteSetting {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String   @db.Text
+  updatedAt DateTime @updatedAt
+}

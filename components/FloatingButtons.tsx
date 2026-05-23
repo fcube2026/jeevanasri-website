@@ -12,13 +12,13 @@ function WhatsAppIcon() {
 }
 
 export default function FloatingButtons() {
-  const [showTop, setShowTop] = useState(false);
+  const [showTop, setShowTop]     = useState(false);
   const [showPulse, setShowPulse] = useState(true);
 
   useEffect(() => {
     const handler = () => setShowTop(window.scrollY > 400);
     window.addEventListener("scroll", handler, { passive: true });
-    const t = setTimeout(() => setShowPulse(false), 4000);
+    const t = setTimeout(() => setShowPulse(false), 5000);
     return () => { window.removeEventListener("scroll", handler); clearTimeout(t); };
   }, []);
 
@@ -30,23 +30,38 @@ export default function FloatingButtons() {
         target="_blank"
         rel="noopener noreferrer"
         aria-label="Chat on WhatsApp"
-        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-all duration-300"
+        className="fixed bottom-6 right-6 z-50 w-14 h-14 rounded-full flex items-center justify-center text-white shadow-2xl hover:scale-110 transition-all duration-300 group"
         style={{ background: "#25d366", boxShadow: "0 8px 30px rgba(37,211,102,0.45)" }}
       >
         {showPulse && (
           <span className="absolute inset-0 rounded-full animate-ping opacity-40" style={{ background: "#25d366" }} />
         )}
         <WhatsAppIcon />
+        {/* Tooltip */}
+        <span
+          className="absolute right-16 bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+        >
+          WhatsApp Us
+        </span>
       </a>
 
       {/* Call button */}
       <a
         href={`tel:${HOSPITAL_INFO.phone}`}
         aria-label="Call us"
-        className="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-all duration-300"
-        style={{ background: "linear-gradient(135deg,#2563eb,#06b6d4)", boxShadow: "0 6px 24px rgba(37,99,235,0.4)" }}
+        className="fixed bottom-24 right-6 z-50 w-12 h-12 rounded-full flex items-center justify-center text-white shadow-xl hover:scale-110 transition-all duration-300 group relative overflow-hidden"
+        style={{ background: "linear-gradient(135deg,#1d4ed8,#0ea5e9)", boxShadow: "0 6px 24px rgba(29,78,216,0.4)" }}
       >
-        <Phone size={18} />
+        <span className="shine-overlay rounded-full" />
+        <Phone size={18} className="relative" />
+        {/* Tooltip */}
+        <span
+          className="absolute right-14 bg-gray-900 text-white text-xs font-bold px-3 py-1.5 rounded-lg whitespace-nowrap opacity-0 group-hover:opacity-100 transition-opacity pointer-events-none"
+          style={{ boxShadow: "0 4px 12px rgba(0,0,0,0.15)" }}
+        >
+          Call Now
+        </span>
       </a>
 
       {/* Scroll to top */}
@@ -54,10 +69,11 @@ export default function FloatingButtons() {
         <button
           onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
           aria-label="Scroll to top"
-          className="fixed bottom-40 right-6 z-50 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300"
-          style={{ background: "linear-gradient(135deg,#e91e8c,#f472b6)", boxShadow: "0 6px 20px rgba(233,30,140,0.35)" }}
+          className="fixed bottom-40 right-6 z-50 w-10 h-10 rounded-full flex items-center justify-center text-white shadow-lg hover:scale-110 transition-all duration-300 relative overflow-hidden"
+          style={{ background: "linear-gradient(135deg,#0ea5e9,#38bdf8)", boxShadow: "0 6px 20px rgba(14,165,233,0.35)" }}
         >
-          <ArrowUp size={17} />
+          <span className="shine-overlay rounded-full" />
+          <ArrowUp size={17} className="relative" />
         </button>
       )}
     </>

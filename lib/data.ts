@@ -3,12 +3,12 @@ export const HOSPITAL_INFO = {
   tagline: "Compassionate Care, Advanced Treatment, Trusted Doctors",
   description:
     "A multispecialty hospital committed to providing world-class healthcare with compassion. Our team of experienced doctors and modern facilities ensure the best outcomes for every patient.",
-  phone: "+919999999999",
-  whatsapp: "919999999999",
+  phone: "+917981929991",
+  whatsapp: "917981929991",
   email: "info@jeevanasrihospitals.com",
-  address: "123 Health Avenue, Hyderabad, Telangana – 500001",
+  address: "Jeevan Sri Hospital, Aswaraopeta, Telangana 507301",
   mapEmbed:
-    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2624!2d78.4867!3d17.3850!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTfCsDIzJzA2LjAiTiA3OMKwMjknMTIuMiJF!5e0!3m2!1sen!2sin!4v1620000000000!5m2!1sen!2sin",
+    "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3806.2624!2d80.6788!3d17.2449!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3a35a0b2c1f2e3d5%3A0x0!2s64WJ%2BW48%2C+Aswaraopeta%2C+Telangana+507301!5e0!3m2!1sen!2sin!4v1716000000000!5m2!1sen!2sin",
   hours: [
     { day: "Monday – Saturday", time: "8:00 AM – 9:00 PM" },
     { day: "Sunday", time: "9:00 AM – 6:00 PM" },
